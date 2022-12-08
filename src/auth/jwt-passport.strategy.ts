@@ -5,16 +5,17 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { UsersRepository } from './users.repository';
 import { JwtPayload } from './jwt-interface';
 import { User } from './user.entity';
-
+import { ConfigService } from '@nestjs/config';
 @Injectable()
 //whenever you make child class from parent you need to initialize constructor of parent class using Super after constructor.
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     @InjectRepository(UsersRepository)
     private usersRepository: UsersRepository,
+    private configService: ConfigService,
   ) {
     super({
-      secretOrKey: 'MysecretIsSuperScaryOne',
+      secretOrKey: configService.get('JWT_SECRET'),
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     });
   }
