@@ -6,16 +6,19 @@ import {
   Param,
   Patch,
   Post,
-  Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { createTaskDto } from './DTOs/create-task.dto';
 import { filterTaskDto } from './DTOs/filter-task.dto';
 import { UpdateTaskStatusDto } from './DTOs/update-task.dto';
 import { TasksService } from './tasks.service';
 import { Tasks } from './entity/tasks.entity';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('tasks')
+//Remember to give strategy inside the authGuard even if you tell about your default strategy in Module.
+@UseGuards(AuthGuard('jwt'))
 export class TasksController {
   constructor(private tasksService: TasksService) {}
 
