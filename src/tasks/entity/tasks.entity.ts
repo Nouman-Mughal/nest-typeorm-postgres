@@ -13,7 +13,7 @@ export class Tasks {
   description: string;
   @Column()
   status: TaskStatus;
-  @ManyToOne((_type) => User, (user) => user.tasks, { eager: false })
+  @ManyToOne(() => User, (user) => user.tasks, { eager: false })
   @Exclude({ toPlainOnly: true })
-  user: User;
+  user: Partial<User>;
 }

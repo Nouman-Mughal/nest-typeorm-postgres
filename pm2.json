@@ -1,0 +1,11 @@
+{
+  "script": "./dist/main.js",
+  "name": "nest-task-management",
+  "watch": true,
+  "instances": "max",
+  "exec_mode": "cluster",
+  "env": {
+    "PORT": 3000,
+    "NODE_ENV": "development"
+  }
+}

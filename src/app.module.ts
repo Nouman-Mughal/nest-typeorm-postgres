@@ -5,11 +5,12 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ConfigValidationSchema } from './config.schema';
 // import { asyncScheduler } from 'rxjs'
+import { AppService } from './app.service';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: [`.env.stage.${process.env.STAGE}`],
+      envFilePath: [`.env.stage.dev`],
       validationSchema: ConfigValidationSchema,
     }),
     TypeOrmModule.forRootAsync({
@@ -29,5 +30,6 @@ import { ConfigValidationSchema } from './config.schema';
     TasksModule,
     AuthModule,
   ],
+  providers: [AppService],
 })
 export class AppModule {}
